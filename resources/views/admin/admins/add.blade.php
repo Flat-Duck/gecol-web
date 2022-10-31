@@ -46,7 +46,18 @@
                 value="{{ old('email') }}"
                 id="email"
             >
-        </div>    
+        </div>
+        <div class="form-group">
+            <label for="password">كلمة المرور</label>
+            <input type="password"
+                class="form-control"
+                name="pass"
+                required
+                placeholder="كلمة المرور"
+                value="{{ old('password') }}"
+                id="password"
+            >
+        </div>
     </div>
 
     <div class="box-footer">
