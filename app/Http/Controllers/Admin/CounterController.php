@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Counter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Reading;
+use PHPUnit\Framework\Constraint\Count;
 
 class CounterController extends Controller
 {
@@ -29,6 +31,15 @@ class CounterController extends Controller
     {
         return view('admin.counters.add');
     }
+    /**
+     * Show the form for creating a new Counter
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add_reading(Counter $counter)
+    {
+        return view('admin.counters.add_reading',compact('counter'));
+    }
 
     /**
      * Save new Counter
@@ -42,6 +53,22 @@ class CounterController extends Controller
         return redirect()->route('admin.counters.index')->with([
                 'type' => 'success',
                 'message' => 'Counter added'
+            ]);
+
+    }
+
+    /**
+     * Save new Counter
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store_reading()
+    {
+        $validatedData = request()->validate(Reading::validationRules());
+        $reading = Reading::create($validatedData);
+        return redirect()->route('admin.counters.index')->with([
+                'type' => 'success',
+                'message' => 'Reading added'
             ]);
 
     }

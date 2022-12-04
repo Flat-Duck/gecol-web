@@ -21,7 +21,7 @@
                             name="number"
                             required
                             placeholder="رقم العداد"
-                            value="{{ old('name') }}"
+                            value="{{ old('number') }}"
                             id="number"
                         >
                     </div>

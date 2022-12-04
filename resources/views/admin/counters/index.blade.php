@@ -33,7 +33,9 @@
                         <th>#</th>
                         <th>رقم العداد</th>
                         <th>القراءة الحالية</th>
-                        <th> التاريخ</th>
+                        <th> تاريخ الحالية</th>
+                        <th>القراءة السابقة</th>
+                        <th> تاريخ السابقة</th>
                         <th>الحالة</th>
                         <th>العمليات</th>
                     </tr>
@@ -42,6 +44,10 @@
                         <tr>
                             <td>{{ $k+1}}</td>
                             <td>{{ $counter->number }}</td>
+                            <td>{{ $counter->last_read()->value??  '-' }}</td>
+                            <td>{{ $counter->last_read()->date??  '-' }}</td>
+                            <td>{{ $counter->before_last_read()->value??  '-' }}</td>
+                            <td>{{ $counter->before_last_read()->date??  '-' }}</td>
                             <td>
                                 @if ($counter->is_active)
                                 <span class="label label-success">مفعل</span>
@@ -49,16 +55,16 @@
                                 <span class="label label-danger">غير مفعل </span>
                                 @endif
                             </td>                            
-                             <td>
-                                {{-- {{ $counter->n_id }} --}}
-                            </td>
-                             <td>
-                                {{-- {{ $counter->n_id }} --}}
-                            </td>
+                             
+                             
                             {{--<td>{{ $counter->user_name }}</td> --}}
                             <td>
                                 <a href="{{ route('admin.counters.edit', ['counter' => $counter->id]) }}">
                                     <i class="fa fa-pencil-square-o"></i>
+                                </a>
+
+                                <a href="{{ route('admin.counters.add_reading', ['counter' => $counter->id]) }}">
+                                    <i class="fa fa-plus"></i>
                                 </a>
 
                                 <form action="{{ route('admin.counters.destroy', ['counter' => $counter->id]) }}"

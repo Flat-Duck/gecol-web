@@ -26,6 +26,28 @@
                             id="name"
                         >
                     </div>
+                    <div class="form-group">
+                        <label for="number">رقم المكتب</label>
+                        <input type="text"
+                            class="form-control"
+                            name="number"
+                            required
+                            placeholder="رقم المكتب"
+                            value="{{ old('city', $office->number) }}"
+                            id="number"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="city">المدينة</label>
+                        <input type="text"
+                            class="form-control"
+                            name="city"
+                            required
+                            placeholder="المدينة"
+                            value="{{ old('city', $office->city) }}"
+                            id="city"
+                        >
+                    </div>
                     {{-- <div class="form-group">
                         <label for="phone">Phone</label>
                         <input type="text"

@@ -8,6 +8,15 @@ class Counter extends Model
 {
     use Searchable;  
     
+            /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'n_id','number'
+    ];
+
     /**
      * @var array Sets the fields that would be searched
      */
@@ -22,12 +31,29 @@ class Counter extends Model
     {
         return [
             'number' => 'required|string',
-            'reading' => 'nullable,'.$id,
+            'n_id' => 'nullable'.$id,
         ];
     }
     public function toggleActivation(){
         $this->is_active = !$this->is_active;
         $this->save();
+    }
+
+        /**
+     * Get the providers for the Service.
+     */
+    public function readings()
+    {
+        return $this->hasMany('App\Reading','number','number');
+    }
+    public function last_read()
+    {
+        return $this->readings->last();
+        
+    }
+    public function before_last_read()
+    {
+        return $this->readings->sortByDesc('id')->values()->skip(1)->take(1)->first();
     }
 
     /**

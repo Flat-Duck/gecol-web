@@ -36,6 +36,8 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
         // Dashboard
         Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
 
+        Route::get('counters/{counter}/add_reading', 'CounterController@add_reading')->name('counters.add_reading');
+        Route::post('counters/{counter}/add_reading', 'CounterController@store_reading')->name('counters.store_reading');
         Route::resource('admins', 'AdminsController');
         Route::resource('offices', 'OfficeController');
         Route::resource('consumers', 'ConsumerController');

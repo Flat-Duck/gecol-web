@@ -14,7 +14,7 @@ class Office extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name','city','number'
     ];
 
     /**
@@ -31,6 +31,8 @@ class Office extends Model
     {
         return [
             'name' => 'required|string',
+            'city' => 'required|string',
+            'number' => 'required',
         ];
     }
 

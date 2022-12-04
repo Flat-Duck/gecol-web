@@ -16,8 +16,7 @@ class CreateCountersTable extends Migration
         Schema::create('counters', function (Blueprint $table) {
             $table->id();
             $table->integer('number')->default(0);
-            $table->bigInteger('consumer_id')->unsigned()->index();
-            $table->foreign('consumer_id')->references('id')->on('consumers');
+            $table->bigInteger('n_id')->unsigned()->index();            
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

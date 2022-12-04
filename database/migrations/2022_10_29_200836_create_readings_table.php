@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConsumersTable extends Migration
+class CreateReadingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateConsumersTable extends Migration
      */
     public function up()
     {
-        Schema::create('consumers', function (Blueprint $table) {
+        Schema::create('readings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->bigInteger('n_id')->default(0)->index()->unique();
-            $table->boolean('is_active')->default(true);
+            $table->integer('number')->default(0);
+            $table->bigInteger('value')->default(0);
+            $table->date('date');            
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateConsumersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consumers');
+        Schema::dropIfExists('counters');
     }
 }

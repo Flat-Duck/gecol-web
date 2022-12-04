@@ -32,6 +32,7 @@
                     <tr>
                         <th>#</th>
                         <th>الاسم</th>
+                        <th>المدينة</th>
                         <th>الحالة</th>
                         <th>العمليات</th>
                     </tr>
@@ -40,6 +41,7 @@
                         <tr>
                             <td>{{ $k+1}}</td>
                             <td>{{ $office->name }}</td>
+                            <td>{{ $office->city }}</td>
                             <td>
                                 @if ($office->is_active)
                                 <span class="label label-success">مفعل</span>

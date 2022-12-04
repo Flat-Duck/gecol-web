@@ -16,8 +16,8 @@ class CreateOfficesTable extends Migration
         Schema::create('offices', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('number')->default(0)->primary();
-            $table->string('name');
+            $table->bigInteger('number')->default(0)->index()->unique();
+            $table->string('city');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
