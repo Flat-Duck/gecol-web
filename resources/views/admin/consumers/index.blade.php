@@ -14,11 +14,26 @@
                 </a>
             </div>
             <div class="box-body">
-                <table class="table table-bordered">
+    <div class="searchbar mt-4 mb-5">
+        <div class="row">                                      
+            <div class="col-md-8">
+                <form>
+                    <div class="input-group margin col-md-4">
+                        <input id="indexSearch" name="search" placeholder="Searsh" value="{{ $search ?? '' }}" type="text" class="form-control" spellcheck="false" data-ms-editor="true" autocomplete="off">
+                        <span class="input-group-btn">                                    
+                            <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>                                
+                </form>
+            </div>                    
+        </div>
+    </div>
+    <table class="table table-bordered">
                     <tr>
                         <th>#</th>
                         <th>الاسم</th>
                         <th>الرقم الوطني</th>
+                        <th>الحالة</th>
                         <th>العمليات</th>
                     </tr>
 
@@ -27,6 +42,13 @@
                             <td>{{ $k+1}}</td>
                             <td>{{ $consumer->name }}</td>
                              <td>{{ $consumer->n_id }}</td>
+                             <td>
+                                @if ($consumer->is_active)
+                                <span class="label label-success">مفعل</span>
+                                @else
+                                <span class="label label-danger">غير مفعل </span>
+                                @endif
+                            </td>
                             {{--<td>{{ $consumer->user_name }}</td> --}}
                             <td>
                                 <a href="{{ route('admin.consumers.edit', ['consumer' => $consumer->id]) }}">
@@ -41,7 +63,7 @@
                                     @method('DELETE')
 
                                     <a onclick="if (confirm('Are you sure?')) { this.parentNode.submit() }">
-                                        <i class="fa fa-trash-o"></i>
+                                        <i data-toggle="tooltip"  title="تغيير الحالة" class='fa fa-lock'></i>
                                     </a>
                                 </form>
                             </td>

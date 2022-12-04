@@ -14,7 +14,7 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        $offices = Office::getList();
+        $offices = Office::getList(request()->search);
 
         return view('admin.offices.index', compact('offices'));
     }
@@ -84,10 +84,10 @@ class OfficeController extends Controller
      */
     public function destroy(Office $office)
     {
-        $office->delete();
+        $office->toggleActivation();
         return redirect()->route('admin.offices.index')->with([
             'type' => 'success',
-            'message' => 'Office deleted successfully'
+            'message' => 'تم تغيير الحالة بنجاح'
         ]);
     }
 }

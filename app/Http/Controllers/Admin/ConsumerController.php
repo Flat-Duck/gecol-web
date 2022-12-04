@@ -15,8 +15,7 @@ class ConsumerController extends Controller
      */
     public function index()
     {
-        $consumers = Consumer::getList();
-
+        $consumers = Consumer::getList(request()->search);
         return view('admin.consumers.index', compact('consumers'));
     }
 
@@ -149,11 +148,11 @@ class ConsumerController extends Controller
         // $database->getReference('consumers/'.$uId)->remove();
 
         // $auth->deleteUser($uId);
-         $consumer->delete();
+        $consumer->toggleActivation();
 
         return redirect()->route('admin.consumers.index')->with([
             'type' => 'success',
-            'message' => 'Consumer deleted successfully'
+            'message' => 'تم تغيير الحالة بنجاح'
         ]);
     }
 }

@@ -16,7 +16,8 @@ class CreateConsumersTable extends Migration
         Schema::create('consumers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('n_id')->default(0);
+            $table->bigInteger('n_id')->default(0)->primary();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

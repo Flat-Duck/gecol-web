@@ -16,8 +16,7 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        $admins = Admin::getList();
-
+        $admins = Admin::getList(request()->search);
         return view('admin.admins.index', compact('admins'));
     }
 
@@ -94,11 +93,10 @@ class AdminsController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        $admin->delete();
-
+        $admin->toggleActivation();
         return redirect()->route('admin.admins.index')->with([
             'type' => 'success',
-            'message' => 'تم الحذف بنجاح'
+            'message' => 'تم تغيير الحالة بنجاح'
         ]);
-    }
+    }    
 }

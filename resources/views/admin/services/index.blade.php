@@ -38,7 +38,7 @@
                                     @method('DELETE')
 
                                     <a onclick="if (confirm('Are you sure?')) { this.parentNode.submit() }">
-                                        <i class="fa fa-trash-o"></i>
+                                        <i data-toggle="tooltip"  title="تغيير الحالة" class='fa fa-lock'></i>
                                     </a>
                                 </form>
                             </td>

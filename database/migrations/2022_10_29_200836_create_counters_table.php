@@ -18,6 +18,7 @@ class CreateCountersTable extends Migration
             $table->integer('number')->default(0);
             $table->bigInteger('consumer_id')->unsigned()->index();
             $table->foreign('consumer_id')->references('id')->on('consumers');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

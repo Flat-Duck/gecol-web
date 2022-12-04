@@ -15,7 +15,7 @@ class CounterController extends Controller
      */
     public function index()
     {
-        $counters = Counter::getList();
+        $counters = Counter::getList(request()->search);
 
         return view('admin.counters.index', compact('counters'));
     }
@@ -85,10 +85,10 @@ class CounterController extends Controller
      */
     public function destroy(Counter $counter)
     {
-        $counter->delete();
+        $counter->toggleActivation();
         return redirect()->route('admin.counters.index')->with([
             'type' => 'success',
-            'message' => 'Counter deleted successfully'
+            'message' => 'تم تغيير الحالة بنجاح'
         ]);
     }
 }
