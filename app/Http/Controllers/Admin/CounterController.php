@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Counter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notice;
 use App\Reading;
 use PHPUnit\Framework\Constraint\Count;
 
@@ -30,6 +31,24 @@ class CounterController extends Controller
     public function create()
     {
         return view('admin.counters.add');
+    }
+        /**
+     * Show the form for creating a new Counter
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function notice(Counter $counter)
+    {
+        $notice =  Notice::create([
+            'counter_id'=>$counter->id
+        ]);   
+        return redirect()->route('admin.counters.index')->with([
+            'type' => 'success',
+            'message' => 'تم ارسال اشعار الدفع بنجاح'
+        ]);   
+        
+        
+        
     }
     /**
      * Show the form for creating a new Counter

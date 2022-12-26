@@ -42,6 +42,8 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
         Route::resource('offices', 'OfficeController');
         Route::resource('consumers', 'ConsumerController');
         Route::resource('counters', 'CounterController');
+        Route::post('/counters/{counter}/notice', 'CounterController@notice')->name('counters.notice');
+        
 
         Route::get('/test','FirebaseController@index');
         // Profile

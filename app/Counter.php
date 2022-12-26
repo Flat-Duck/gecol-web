@@ -46,6 +46,10 @@ class Counter extends Model
     {
         return $this->hasMany('App\Reading','number','number');
     }
+    public function notices()
+    {
+        return $this->hasMany('App\Notice');
+    }
     public function last_read()
     {
         return $this->readings->last();

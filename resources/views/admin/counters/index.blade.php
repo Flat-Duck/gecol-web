@@ -78,6 +78,13 @@
                                         <i data-toggle="tooltip"  title="تغيير الحالة" class='fa fa-lock'></i>
                                     </a>
                                 </form>
+
+                                <form action="{{ route('admin.counters.notice', ['counter' => $counter->id]) }}" method="POST" class="inline pointer">
+                                    @csrf
+                                    <a onclick="if (confirm('هل تنوي ارسال اشعار بالدفع?')) { this.parentNode.submit() }">
+                                        <i data-toggle="tooltip"  title="ارسال اشعار بالدفع" class='fa fa-send'></i>
+                                    </a>
+                                </form>
                             </td>
                         </tr>
                     @empty
