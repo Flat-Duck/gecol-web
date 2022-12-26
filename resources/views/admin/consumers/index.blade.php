@@ -33,6 +33,8 @@
                         <th>#</th>
                         <th>الاسم</th>
                         <th>الرقم الوطني</th>
+                        <th>المكتب</th>
+                        <th>المدينة</th>
                         <th>الحالة</th>
                         <th>العمليات</th>
                     </tr>
@@ -42,6 +44,8 @@
                             <td>{{ $k+1}}</td>
                             <td>{{ $consumer->name }}</td>
                              <td>{{ $consumer->n_id }}</td>
+                             <td>{{ $consumer->office->name }}</td>
+                             <td>{{ $consumer->office->city }}</td>
                              <td>
                                 @if ($consumer->is_active)
                                 <span class="label label-success">مفعل</span>

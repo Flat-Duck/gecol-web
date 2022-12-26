@@ -37,80 +37,15 @@
                             id="n_id">
                     </div>
 
-                   {{-- <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email"
-                            class="form-control"
-                            name="email"
-                            required
-                            placeholder="Phone"
-                            value="{{ old('email') }}"
-                            id="email"
-                        >
-                    </div>
-
                     <div class="form-group">
-                        <label for="location">Location</label>
-                        <textarea class="form-control"
-                            name="location"
-                            id="location"
-                            required
-                            placeholder="Location"
-                        >{{ old('location') }}</textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="user_name">User Name</label>
-                        <input type="text"
-                            class="form-control"
-                            name="user_name"
-                            required
-                            placeholder="User Name"
-                            value="{{ old('user_name') }}"
-                            id="user_name"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password"
-                            class="form-control"
-                            name="password"
-                            
-                            placeholder="Password"
-                            id="password"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password-confirmation">Confirm Password</label>
-                        <input type="password"
-                            class="form-control"
-                            name="password_confirmation"
-                            
-                            placeholder="Password"
-                            id="password-confirmation"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="services">Service</label>
-                        <select class="form-control"
-                            name="services[]"
-                            
-                            multiple
-                            id="services"
-                        >
-                            @foreach ($services as $service)
-                                <option value="{{ $service->id }}"
-                                    {{ is_array(old('services')) && in_array($service->id, old('services')) ? 'selected' : '' }}
-                                >
-                                    {{ $service->name }}
-                                </option>
+                        <label for="office">مكتب الجباية</label>
+                        <select  id="office" name="office_id" class="form-control select2">
+                            <option disabled value="0">المدينة | اسم المكتب</option>
+                            @foreach($offices as $k=> $office)
+                                <option value="{{$office->id }}" {{$office->id == old('office_id') ? ' selected="selected"' : '' }} >{{$office->name}} | {{$office->city}}</option>
                             @endforeach
                         </select>
-                    </div> --}}
-                </div>
+                    </div>
 
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">حفظ</button>

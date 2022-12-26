@@ -17,6 +17,7 @@ class CreateConsumersTable extends Migration
             $table->id();
             $table->string('name');
             $table->bigInteger('n_id')->default(0)->index()->unique();
+            $table->bigInteger('office_id')->unsigned()->index();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Consumer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Office;
 
 class ConsumerController extends Controller
 {
@@ -26,9 +27,9 @@ class ConsumerController extends Controller
      */
     public function create()
     {
-       // $services = Service::all();
+        $offices = Office::all();
 
-        return view('admin.consumers.add');//, compact('services'));
+        return view('admin.consumers.add', compact('offices'));
     }
 
     /**

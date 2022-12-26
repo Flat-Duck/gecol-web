@@ -37,7 +37,16 @@
                             id="n_id"
                         >
                     </div>
-
+                    <div class="form-group">
+                        <label for="office">الطالب</label>
+                        <select  id="office" name="office_id" class="form-control">
+                            <option disabled value="0">المدينة | اسم المكتب</option>
+                            @foreach($offices as $k=> $office)
+                                <option value="{{$office->id }}" {{$office->id == old('office_id',$consumer->office_id) ? ' selected="selected"' : '' }}  >{{$office->name}} | {{$office->city}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
                    {{-- <div class="form-group">
                         <label for="location">Location</label>
                         <textarea class="form-control"

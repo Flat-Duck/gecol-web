@@ -20,7 +20,7 @@ protected $searchableFields = ['*'];
      * @var array
      */
     protected $fillable = [
-        'name','n_id'
+        'name','n_id','office_id'
     ];
 
     /**
@@ -33,6 +33,7 @@ protected $searchableFields = ['*'];
         return [
             'name' => 'required|string',
             'n_id' => 'numeric'.$id,
+            'office_id'=> 'numeric'
         ];
     }
 
@@ -42,6 +43,13 @@ protected $searchableFields = ['*'];
     public function counter()
     {
         return $this->hasOne('App\Counter');
+    }
+        /**
+     * Get the providers for the Service.
+     */
+    public function office()
+    {
+        return $this->belongsTo('App\Office');
     }
     public function toggleActivation(){
         $this->is_active = !$this->is_active;
