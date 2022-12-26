@@ -42,7 +42,7 @@
                         <select  id="office" name="office_id" class="form-control">
                             <option disabled value="0">المدينة | اسم المكتب</option>
                             @foreach($offices as $k=> $office)
-                                <option value="{{$office->id }}" {{$office->id == old('office_id',$consumer->office_id) ? ' selected="selected"' : '' }}  >{{$office->name}} | {{$office->city}}</option>
+                                <option value="{{$office->id }}" {{$office->id == old('office_id',$consumer->office_id) ? ' selected="selected"' : '' }} >{{$office->city}} | {{$office->name}}</option>
                             @endforeach
                         </select>
                     </div>
