@@ -96,8 +96,8 @@ class ConsumerController extends Controller
        // $services = Service::all();
 
        // $consumer->services = $consumer->services->pluck('id')->toArray();
-
-        return view('admin.consumers.edit', compact('consumer'));//, 'services'));
+       $offices = Office::all();
+        return view('admin.consumers.edit', compact('consumer','offices'));//, 'services'));
     }
 
     /**
