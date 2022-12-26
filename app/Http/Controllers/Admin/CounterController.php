@@ -38,7 +38,9 @@ class CounterController extends Controller
      */
     public function add_reading(Counter $counter)
     {
-        return view('admin.counters.add_reading',compact('counter'));
+        $readings = $counter->readings->sortByDesc('created_at', SORT_NATURAL);
+
+        return view('admin.counters.add_reading',compact('counter','readings'));
     }
 
     /**
