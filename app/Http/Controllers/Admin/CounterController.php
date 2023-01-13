@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Counter;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notice;
 use App\Reading;
-use PHPUnit\Framework\Constraint\Count;
+use Carbon\Carbon;
 
 class CounterController extends Controller
 {
@@ -40,7 +39,8 @@ class CounterController extends Controller
     public function notice(Counter $counter)
     {
         $notice =  Notice::create([
-            'counter_id'=>$counter->id
+            'counter_id'=>$counter->id,
+            'date' => Carbon::now()
         ]);   
         return redirect()->route('admin.counters.index')->with([
             'type' => 'success',

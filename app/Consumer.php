@@ -42,7 +42,14 @@ protected $searchableFields = ['*'];
      */
     public function counter()
     {
-        return $this->hasOne('App\Counter');
+        return $this->hasOne('App\Counter','n_id','n_id');
+    }
+    /**
+     * Get the providers for the Service.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User','n_id','n_id');
     }
         /**
      * Get the providers for the Service.

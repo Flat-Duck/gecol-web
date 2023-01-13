@@ -58,10 +58,6 @@ class AdminsController extends Controller
      */
     public function edit(Admin $admin)
     {
-        // $students = Student::all();
-        // $teachers = Teacher::all();
-        // $levels = Level::all();
-
         return view('admin.admins.edit',compact('admin'));
     }
 

@@ -15,7 +15,8 @@ class CreateNoticesTable extends Migration
     {
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('counter_id')->unsigned()->index()->default(0);            
+            $table->bigInteger('counter_id')->unsigned()->index()->default(0);
+            $table->date('date');
             $table->timestamps();
         });
     }

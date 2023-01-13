@@ -17,7 +17,7 @@ class CreateReadingsTable extends Migration
             $table->id();
             $table->integer('number')->default(0);
             $table->bigInteger('value')->default(0);
-            $table->date('date');            
+            $table->date('date');
             $table->timestamps();
         });
     }
