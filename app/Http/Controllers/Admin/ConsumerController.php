@@ -45,7 +45,7 @@ class ConsumerController extends Controller
             ['name'=> request()->name,
             'email'=> request()->name. '@gecol.test',
             'n_id'=> request()->n_id,
-            'password'=> bcrypt(request()->phone)]
+            'password'=> bcrypt(request()->n_id)]
         );
         return redirect()->route('admin.consumers.index')->with([
             'type' => 'success',
