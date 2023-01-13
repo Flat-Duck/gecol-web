@@ -9,7 +9,7 @@ class AuthController extends ApiController
 {
     public function login(Request $request)
     {
-        if (!Auth::guard()->attempt($request->only(['email','password']))) {
+        if (!Auth::guard()->attempt($request->only(['n_id','password']))) {
             return $this->sendError('not Authrized', 'Invalid login Data', 200);
         }
         

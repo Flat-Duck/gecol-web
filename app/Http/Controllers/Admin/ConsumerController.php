@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Consumer;
 use App\Http\Controllers\Controller;
 use App\Office;
+use App\User;
 
 class ConsumerController extends Controller
 {
@@ -40,6 +41,12 @@ class ConsumerController extends Controller
     {
         $validatedData = request()->validate(Consumer::validationRules());
         $consumer = Consumer::create($validatedData);
+        $user = User::firstOrCreate(
+            ['name'=> request()->name,
+            'email'=> request()->name. '@gecol.test',
+            'n_id'=> request()->n_id,
+            'password'=> bcrypt(request()->phone)]
+        );
         return redirect()->route('admin.consumers.index')->with([
             'type' => 'success',
             'message' => 'Consumer added'
