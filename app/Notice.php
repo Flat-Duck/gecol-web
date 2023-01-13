@@ -12,7 +12,7 @@ class Notice extends Model
      * @var array
      */
     protected $fillable = [
-        'counter_id'
+        'counter_id','date'
     ];
 
     /**
