@@ -38,7 +38,7 @@
                         >
                     </div>
                     <div class="form-group">
-                        <label for="office">الطالب</label>
+                        <label for="office">المكتب</label>
                         <select  id="office" name="office_id" class="form-control">
                             <option disabled value="0">المدينة | اسم المكتب</option>
                             @foreach($offices as $k=> $office)
