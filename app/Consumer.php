@@ -35,7 +35,7 @@ protected $searchableFields = ['*'];
     {
         return [
             'name' => 'required|string',            
-            'n_id' => 'numeric|unique:consumers,n_id'.$id,
+            'n_id' => 'numeric|unique:consumers,n_id,'.$id,
             'office_id'=> 'numeric'
         ];
     }

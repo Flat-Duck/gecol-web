@@ -69,9 +69,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
+            'email' => 'required|string|unique:users,email,'.$id,
             'password' => 'required|string',
-            'n_id' => 'numeric|unique:users,n_id'.$id,
+            'n_id' => 'numeric|unique:users,n_id,'.$id,
             'office_id'=> 'numeric'
         ];
     }
