@@ -36,16 +36,17 @@ class AuthController extends ApiController
             return $this->sendError('Bad data', $validator->messages(), Response::HTTP_BAD_REQUEST);
         }
 
+        $pinCode = mt_rand(111111,999999);
         $consumer = Consumer::create(request()->only(['name','n_id','office_id']));
         $balance = Balance::create(['consumer_id' => $consumer->id ,'amount'=> 0]);
         $user = User::firstOrCreate([
             'name'=> request()->name,
             'email'=> request()->email,
             'n_id'=> request()->n_id,
-            'remember_token' => '1234',
+            'remember_token' => $pinCode,
             'password'=> bcrypt(request()->password)
             ]);            
-        $user->notify(new VerificationPin('1234', $user->email, $user->name));
+        $user->notify(new VerificationPin($pinCode, $user->email, $user->name));
         return $this->sendResponse("Registred Succefully", ['user' => $user]);
     }
 
