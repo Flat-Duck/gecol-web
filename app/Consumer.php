@@ -22,7 +22,10 @@ protected $searchableFields = ['*'];
     protected $fillable = [
         'name','n_id','office_id'
     ];
-
+    public function balance()
+    {
+        return $this->hasOne('App\Balance','consumer_id','id');
+    }
     /**
      * Validation rules
      *
@@ -31,8 +34,8 @@ protected $searchableFields = ['*'];
     public static function validationRules($id = null)
     {
         return [
-            'name' => 'required|string',
-            'n_id' => 'numeric'.$id,
+            'name' => 'required|string',            
+            'n_id' => 'numeric|unique:consumers,n_id'.$id,
             'office_id'=> 'numeric'
         ];
     }

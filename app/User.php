@@ -58,7 +58,22 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function balance()
     {
-        return $this->hasOne('App\Balance','consumer_id','id');
+        return $this->consumer->balance();
+    }
+        /**
+     * Validation rules
+     *
+     * @return array
+     **/
+    public static function validationRules($id = null)
+    {
+        return [
+            'name' => 'required|string',
+            'email' => 'required|string|unique:users,email',
+            'password' => 'required|string',
+            'n_id' => 'numeric|unique:users,n_id'.$id,
+            'office_id'=> 'numeric'
+        ];
     }
 
     /**
@@ -71,7 +86,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $data['user']['office_city'] = $this->consumer->office->city?? '-';
         $data['user']['office_number'] = $this->consumer->office->number?? '-';
         $data['user']['counter_number'] = $this->counter->number?? '-';
-        $data['user']['total_debt'] = $this->counter->total_debt()?? '-';
+        $data['user']['total_debt'] = $this->counter? $this->counter->total_debt()?? '-' : '-';
         $data['user']['reading_last'] = $this->counter? $this->counter->last_read()->value?? '-' : '-';
         $data['user']['reading_blat'] = $this->counter? $this->counter->before_last_read()->value?? '-' : '-';
 

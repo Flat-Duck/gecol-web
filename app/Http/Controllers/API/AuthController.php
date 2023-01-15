@@ -36,6 +36,14 @@ class AuthController extends ApiController
             return $this->sendError('Bad data', $validator->messages(), Response::HTTP_BAD_REQUEST);
         }
 
+        $validator = Validator::make($request->all(), 
+        User::validationRules()
+    );
+    
+    if ($validator->fails()) {            
+        return $this->sendError('Bad data', $validator->messages(), Response::HTTP_BAD_REQUEST);
+    }
+
         $pinCode = mt_rand(111111,999999);
         $consumer = Consumer::create(request()->only(['name','n_id','office_id']));
         $balance = Balance::create(['consumer_id' => $consumer->id ,'amount'=> 0]);

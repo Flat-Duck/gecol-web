@@ -26,7 +26,7 @@ class HomeController extends ApiController
     public function pay(Reading $reading)
     { 
         if($reading->is_paid){
-            return $this->sendError("Already Paid", $reading);    
+            return $this->sendResponse("مدفوعة مسبقا", $reading);    
         }
         $bank = Balance::find(1);
         $user = request()->user();
@@ -34,7 +34,7 @@ class HomeController extends ApiController
         $balance = $user->balance;
         
         if(($read_val) > $balance->amount){
-            return $this->sendError("Balance not enugh", $balance);    
+            return $this->sendError("رصيدك غير كافي", $balance,200);    
         }
         
         $user->balance->amount -= $read_val;
@@ -44,7 +44,7 @@ class HomeController extends ApiController
         $reading->is_paid = true;
         $reading->save();
         
-        return $this->sendResponse("Paid Suceeful", $balance);
+        return $this->sendResponse("تم الدفع بنجاح", $balance);
     }
 
     public function main()

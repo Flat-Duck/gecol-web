@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Scopes\Searchable;
+use phpDocumentor\Reflection\Types\Boolean;
+
 class Reading extends Model
 {
     use Searchable;            
@@ -14,6 +16,10 @@ class Reading extends Model
      */
     protected $fillable = [
         'date','value','number'
+    ];
+
+    protected $casts = [
+        'is_paid' => 'boolean',
     ];
 
     /**
