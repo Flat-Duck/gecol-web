@@ -31,7 +31,7 @@ class Counter extends Model
     {
         return [
             'number' => 'required|string',
-            'n_id' => 'nullable'.$id,
+            'n_id' => 'nullable|unique:counters,n_id,'.$id,
         ];
     }
     public function toggleActivation(){

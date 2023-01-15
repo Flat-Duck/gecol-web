@@ -81,8 +81,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function main()
     {
+        $name = $this->consumer->office->name?? '-';
+        $city = $this->consumer->office->city?? '-';
         $data['user'] = $this;
-        $data['user']['office_name'] = $this->consumer->office->name?? '-';
+        $data['user']['office_name'] = $name. ' / ' .$city;
         $data['user']['office_city'] = $this->consumer->office->city?? '-';
         $data['user']['office_number'] = $this->consumer->office->number?? '-';
         $data['user']['counter_number'] = $this->counter->number?? '-';
