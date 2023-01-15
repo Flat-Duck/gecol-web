@@ -18,6 +18,7 @@ class CreateReadingsTable extends Migration
             $table->integer('number')->default(0);
             $table->bigInteger('value')->default(0);
             $table->date('date');
+            $table->boolean('is_paid')->default(false);
             $table->timestamps();
         });
     }

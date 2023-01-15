@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Student;
+use App\Balance;
+use App\Reading;
 
 class HomeController extends ApiController
 {
@@ -20,6 +21,30 @@ class HomeController extends ApiController
         
 
         return $this->sendResponse("Readings Loaded", $readings);
+    }
+
+    public function pay(Reading $reading)
+    { 
+        if($reading->is_paid){
+            return $this->sendError("Already Paid", $reading);    
+        }
+        $bank = Balance::find(1);
+        $user = request()->user();
+        $read_val = $reading->value * 0.14;
+        $balance = $user->balance;
+        
+        if(($read_val) > $balance->amount){
+            return $this->sendError("Balance not enugh", $balance);    
+        }
+        
+        $user->balance->amount -= $read_val;
+        $user->balance->save();
+        $bank->amount += $read_val;
+        $bank->save();        
+        $reading->is_paid = true;
+        $reading->save();
+        
+        return $this->sendResponse("Paid Suceeful", $balance);
     }
 
     public function main()

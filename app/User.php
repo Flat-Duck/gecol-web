@@ -7,9 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,HasApiTokens;
+    use Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','n_id'
+        'name', 'email', 'password','n_id', 'remember_token'
     ];
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',// 'remember_token',
     ];
 
     /**
@@ -53,6 +53,13 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Counter','n_id','n_id');
     }
+        /**
+     * Get the providers for the Service.
+     */
+    public function balance()
+    {
+        return $this->hasOne('App\Balance','consumer_id','id');
+    }
 
     /**
      * Get the providers for the Service.
@@ -60,12 +67,13 @@ class User extends Authenticatable
     public function main()
     {
         $data['user'] = $this;
-        $data['user']['office_name'] = $this->consumer->office->name;
-        $data['user']['office_city'] = $this->consumer->office->city;
-        $data['user']['office_number'] = $this->consumer->office->number;
-        $data['user']['counter_number'] = $this->counter->number;
-        $data['user']['reading_last'] = $this->counter->last_read()->value?? '-';
-        $data['user']['reading_blat'] = $this->counter->before_last_read()->value?? '-';
+        $data['user']['office_name'] = $this->consumer->office->name?? '-';
+        $data['user']['office_city'] = $this->consumer->office->city?? '-';
+        $data['user']['office_number'] = $this->consumer->office->number?? '-';
+        $data['user']['counter_number'] = $this->counter->number?? '-';
+        $data['user']['total_debt'] = $this->counter->total_debt()?? '-';
+        $data['user']['reading_last'] = $this->counter? $this->counter->last_read()->value?? '-' : '-';
+        $data['user']['reading_blat'] = $this->counter? $this->counter->before_last_read()->value?? '-' : '-';
 
         return $data;
         

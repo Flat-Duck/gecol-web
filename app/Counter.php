@@ -55,6 +55,11 @@ class Counter extends Model
         return $this->readings->last();
         
     }
+
+    public function total_debt()
+    {
+        return $this->readings->where('is_paid',false)->sum('value') * 0.15;
+    }
     public function before_last_read()
     {
         return $this->readings->sortByDesc('id')->values()->skip(1)->take(1)->first();

@@ -16,5 +16,6 @@ class AdminsTableSeeder extends Seeder
             'username' => 'admin',
             'password' => bcrypt('123456'),
         ]);
+        App\Balance::create(['consumer_id' => 0 ,'amount'=> 0]);
     }
 }

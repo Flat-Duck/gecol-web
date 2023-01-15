@@ -17,12 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::name("api.")->namespace('API')->group(function () {
      Route::post('/login', 'AuthController@login');
+     Route::post('/register', 'AuthController@register');
+     Route::post('/verify', 'AuthController@verify');
 
      Route::group(['middleware' => ['auth:api']], function () {
 
          Route::get('main', 'HomeController@main');
          Route::get('readings', 'HomeController@readings');
          Route::get('notices', 'HomeController@notices');
+         Route::post('pay/{reading}', 'HomeController@pay');
 
      //   Route::get('/password', 'HomeController@updatePassword');
      //   Route::post('/password', 'HomeController@updatePassword');

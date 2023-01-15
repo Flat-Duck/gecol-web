@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConsumersTable extends Migration
+class CreateBalancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateConsumersTable extends Migration
      */
     public function up()
     {
-        Schema::create('consumers', function (Blueprint $table) {
+        Schema::create('balances', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->bigInteger('n_id')->default(0)->index()->unique();
-            $table->bigInteger('office_id')->nullable()->unsigned()->index();
-            $table->boolean('is_active')->default(true);
+            $table->float('amount')->default(0);
+            $table->bigInteger('consumer_id')->unsigned()->index()->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateConsumersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consumers');
+        Schema::dropIfExists('balances');
     }
 }
