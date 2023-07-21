@@ -15,17 +15,17 @@
             </div>
             <div class="box-body">
     <div class="searchbar mt-4 mb-5">
-        <div class="row">                                      
+        <div class="row">
             <div class="col-md-8">
                 <form>
                     <div class="input-group margin col-md-4">
                         <input id="indexSearch" name="search" placeholder="Searsh" value="{{ $search ?? '' }}" type="text" class="form-control" spellcheck="false" data-ms-editor="true" autocomplete="off">
-                        <span class="input-group-btn">                                    
+                        <span class="input-group-btn">
                             <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
                         </span>
-                    </div>                                
+                    </div>
                 </form>
-            </div>                    
+            </div>
         </div>
     </div>
     <table class="table table-bordered">
@@ -33,8 +33,10 @@
                         <th>#</th>
                         <th>رقم العداد</th>
                         <th>القراءة الحالية</th>
+                        <th> حالة القراءة الحالية</th>
                         <th> تاريخ الحالية</th>
                         <th>القراءة السابقة</th>
+                        <th> حالة القراءة السابقة</th>
                         <th> تاريخ السابقة</th>
                         <th>الحالة</th>
                         <th>العمليات</th>
@@ -45,8 +47,23 @@
                             <td>{{ $k+1}}</td>
                             <td>{{ $counter->number }}</td>
                             <td>{{ $counter->last_read()->value??  '-' }}</td>
+                            <td>
+
+                                @if ($counter->last_read()->is_paid)
+                                <span class="label label-success">مدفوعة</span>
+                                @else
+                                <span class="label label-danger">غير مدفوعة</span>
+                                @endif
+                            </td>
                             <td>{{ $counter->last_read()->date??  '-' }}</td>
                             <td>{{ $counter->before_last_read()->value??  '-' }}</td>
+                            <td>
+                            @if ($counter->before_last_read()->is_paid)
+                            <span class="label label-success">مدفوعة</span>
+                            @else
+                            <span class="label label-danger">غير مدفوعة</span>
+                            @endif
+                        </td>
                             <td>{{ $counter->before_last_read()->date??  '-' }}</td>
                             <td>
                                 @if ($counter->is_active)
@@ -54,9 +71,9 @@
                                 @else
                                 <span class="label label-danger">غير مفعل </span>
                                 @endif
-                            </td>                            
-                             
-                             
+                            </td>
+
+
                             {{--<td>{{ $counter->user_name }}</td> --}}
                             <td>
                                 <a href="{{ route('admin.counters.edit', ['counter' => $counter->id]) }}">

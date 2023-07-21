@@ -66,31 +66,39 @@
             <div class="box-header with-border">
                 <h3 class="box-title">قراءات العداد</h3>
             </div>
-            <div class="box-body">    
+            <div class="box-body">
                 <table class="table table-bordered">
                     <tr>
                         <th>#</th>
                         <th>القراءة</th>
-                        <th>التاريخ</th>                    
+                        <th>التاريخ</th>
                     </tr>
                     @php
-                    $i =0;    
+                    $i =0;
                     @endphp
                     @forelse ($readings as $k=> $reading)
                     @php
-                    $i +=1;    
-                    @endphp                    
+                    $i +=1;
+                    @endphp
                         <tr>
                             <td>{{ $k+1}}</td>
                             <td>{{ $reading->value??  '-' }}</td>
                             <td>{{ $reading->date??  '-' }}
+                            <td>
+                            @if ($reading->is_paid)
+                                <span class="label label-success">مدفوعة</span>
+                            @else
+                                <span class="label label-danger">غير مدفوعة</span>
+                            @endif
+                            </td>
+                            <td>
                             @if ($i==1)
                             <span class="label label-success">الحالية</span>
-                                
+
                             @endif
                             @if ($i==2)
                             <span class="label label-info">السابقة</span>
-                            
+
                         @endif
                             </td>
                         </tr>
@@ -100,7 +108,7 @@
                         </tr>
                         @endforelse
                 </table>
-            </div>        
+            </div>
         </div>
     </div>
 </div>

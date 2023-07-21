@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Scopes\Searchable;
 class Counter extends Model
 {
-    use Searchable;  
-    
+    use Searchable;
+
             /**
      * The attributes that are mass assignable.
      *
@@ -20,8 +20,8 @@ class Counter extends Model
     /**
      * @var array Sets the fields that would be searched
      */
-    protected $searchableFields = ['*']; 
-    
+    protected $searchableFields = ['*'];
+
     /**
      * Validation rules
      *
@@ -30,7 +30,7 @@ class Counter extends Model
     public static function validationRules($id = null)
     {
         return [
-            'number' => 'required|string',
+            'number' => 'required|string|unique:counters,number,'.$id,
             'n_id' => 'nullable|unique:counters,n_id,'.$id,
         ];
     }
@@ -53,7 +53,7 @@ class Counter extends Model
     public function last_read()
     {
         return $this->readings->last();
-        
+
     }
 
     public function total_debt()
@@ -76,6 +76,6 @@ class Counter extends Model
             ->latest()
             ->paginate(10)
             ->withQueryString();
-        
+
     }
 }
