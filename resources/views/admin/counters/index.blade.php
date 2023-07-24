@@ -49,20 +49,29 @@
                             <td>{{ $counter->last_read()->value??  '-' }}</td>
                             <td>
 
-                                @if ($counter->last_read()->is_paid)
-                                <span class="label label-success">مدفوعة</span>
-                                @else
-                                <span class="label label-danger">غير مدفوعة</span>
-                                @endif
+                                @if ($counter->last_read())
+                                    @if ($counter->last_read()->is_paid)
+
+                                    <span class="label label-success">مدفوعة</span>
+                                    @else
+                                    <span class="label label-danger">غير مدفوعة</span>
+                                    @endif
+                                    @else
+                                    <span class="label label-info">-</span>
+                                    @endif
                             </td>
                             <td>{{ $counter->last_read()->date??  '-' }}</td>
                             <td>{{ $counter->before_last_read()->value??  '-' }}</td>
                             <td>
-                            @if ($counter->before_last_read()->is_paid)
-                            <span class="label label-success">مدفوعة</span>
-                            @else
-                            <span class="label label-danger">غير مدفوعة</span>
-                            @endif
+                                @if ($counter->before_last_read())
+                                    @if ($counter->before_last_read()->is_paid)
+                                        <span class="label label-success">مدفوعة</span>
+                                    @else
+                                        <span class="label label-danger">غير مدفوعة</span>
+                                    @endif
+                                @else
+                                    <span class="label label-info">-</span>
+                                @endif
                         </td>
                             <td>{{ $counter->before_last_read()->date??  '-' }}</td>
                             <td>
