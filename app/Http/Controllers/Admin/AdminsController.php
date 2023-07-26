@@ -8,7 +8,7 @@ use App\Admin;
 
 class AdminsController extends Controller
 {
-    
+
     /**
      * Display a list of Admins.
      *
@@ -38,11 +38,9 @@ class AdminsController extends Controller
      */
     public function store()
     {
-        request()->merge(['password'=>bcrypt('password')]);
+        request()->merge(['password'=>bcrypt(request()->password)]);
         $validatedData = request()->validate(Admin::validationRules(null));
         $admin = Admin::create($validatedData);
-
-
 
         return redirect()->route('admin.admins.index')->with([
             'type' => 'success',
@@ -94,5 +92,5 @@ class AdminsController extends Controller
             'type' => 'success',
             'message' => 'تم تغيير الحالة بنجاح'
         ]);
-    }    
+    }
 }
