@@ -17,9 +17,12 @@ class AuthController extends ApiController
 {
     public function login(Request $request)
     {
-        $request->merge(['is_active'=> true]);
 
-        if (!Auth::guard()->attempt($request->only(['n_id','password','is_active']))) {
+
+        if (!Auth::guard()->attempt($request->only(['n_id','password']))) {
+            return $this->sendError('not Authrized', 'Invalid login Data', 200);
+        }
+        if(!Auth::guard()->user()->consumer->is_active){
             return $this->sendError('not Authrized', 'Invalid login Data', 200);
         }
 
