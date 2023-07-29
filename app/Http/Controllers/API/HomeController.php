@@ -10,7 +10,7 @@ class HomeController extends ApiController
     public function notices()
     {
         $notices = request()->user()->counter->notices;
-        
+
 
         return $this->sendResponse("Notices Loaded", $notices);
     }
@@ -18,32 +18,36 @@ class HomeController extends ApiController
     public function readings()
     {
         $readings = request()->user()->counter->readings;
-        
+
 
         return $this->sendResponse("Readings Loaded", $readings);
     }
 
     public function pay(Reading $reading)
-    { 
+    {
+
+        if(!$reading->counter->is_active){
+            return $this->sendResponse("هذا العداد غير مفعل!", $reading);
+        }
         if($reading->is_paid){
-            return $this->sendResponse("مدفوعة مسبقا", $reading);    
+            return $this->sendResponse("مدفوعة مسبقا", $reading);
         }
         $bank = Balance::find(1);
         $user = request()->user();
         $read_val = $reading->value * 0.14;
         $balance = $user->balance;
-        
+
         if(($read_val) > $balance->amount){
-            return $this->sendError("رصيدك غير كافي", $balance,200);    
+            return $this->sendError("رصيدك غير كافي", $balance,200);
         }
-        
+
         $user->balance->amount -= $read_val;
         $user->balance->save();
         $bank->amount += $read_val;
-        $bank->save();        
+        $bank->save();
         $reading->is_paid = true;
         $reading->save();
-        
+
         return $this->sendResponse("تم الدفع بنجاح", $balance);
     }
 
@@ -53,7 +57,7 @@ class HomeController extends ApiController
 
         return $this->sendResponse("Main data Loaded", $user);
     }
-    
+
     public function updatePassword()
     {
         $user = request()->user();

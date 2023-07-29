@@ -17,30 +17,32 @@ class AuthController extends ApiController
 {
     public function login(Request $request)
     {
-        if (!Auth::guard()->attempt($request->only(['n_id','password']))) {
+        $request->merge(['is_active'=> true]);
+
+        if (!Auth::guard()->attempt($request->only(['n_id','password','is_active']))) {
             return $this->sendError('not Authrized', 'Invalid login Data', 200);
         }
-        
+
         $token = Auth::guard()->user()->createToken('AuthToken')->accessToken;
         return $this->sendResponse("Login Succefull", ['accessToken' => $token]);
     }
 
     public function register(Request $request)
     {
-        
-        $validator = Validator::make($request->all(), 
+
+        $validator = Validator::make($request->all(),
             Consumer::validationRules()
         );
-        
-        if ($validator->fails()) {            
+
+        if ($validator->fails()) {
             return $this->sendError('Bad data', $validator->messages(), Response::HTTP_BAD_REQUEST);
         }
 
-        $validator = Validator::make($request->all(), 
+        $validator = Validator::make($request->all(),
         User::validationRules()
     );
-    
-    if ($validator->fails()) {            
+
+    if ($validator->fails()) {
         return $this->sendError('Bad data', $validator->messages(), Response::HTTP_BAD_REQUEST);
     }
 
@@ -53,7 +55,7 @@ class AuthController extends ApiController
             'n_id'=> request()->n_id,
             'remember_token' => $pinCode,
             'password'=> bcrypt(request()->password)
-            ]);            
+            ]);
         $user->notify(new VerificationPin($pinCode, $user->email, $user->name));
         return $this->sendResponse("Registred Succefully", ['user' => $user]);
     }
@@ -65,16 +67,16 @@ class AuthController extends ApiController
             if($user->remember_token == $request->pin){
                 $user->remember_token = null;
                 $user->email_verified_at = Carbon::now();
-                $user->save();            
+                $user->save();
                 $token = $user->createToken('AuthToken')->accessToken;
                 return $this->sendResponse("Login Succefull", ['accessToken' => $token]);
-            
+
             }else{
                 return $this->sendError('not found', 'User not Found', 404);
             }
         }else{
             return $this->sendError('not found', 'User not Found', 404);
-        }        
+        }
     }
 
 }

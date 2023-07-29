@@ -8,7 +8,7 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class Reading extends Model
 {
-    use Searchable;            
+    use Searchable;
         /**
      * The attributes that are mass assignable.
      *
@@ -22,11 +22,19 @@ class Reading extends Model
         'is_paid' => 'boolean',
     ];
 
+            /**
+     * Get the providers for the Service.
+     */
+    public function counter()
+    {
+        return $this->belongsTo('App\Counter','number','number');
+    }
+
     /**
      * @var array Sets the fields that would be searched
      */
     protected $searchableFields = ['*'];
-    
+
     /**
      * Validation rules
      *
